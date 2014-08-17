@@ -11,6 +11,7 @@ using System.Windows.Forms;
 #region Importações da solução
 using SysShop.DTO;
 using SysShop.BLL;
+using SysShop.BLL.Excecoes;
 #endregion
 
 namespace SysShop.Forms
@@ -48,7 +49,7 @@ namespace SysShop.Forms
             AtualizarCampos();
             //Altera o texto dos botões
             btnOk.Text = "Salvar";
-            btnCancelar.Text = "Cancelar";
+            btnLimpar.Text = "Cancelar";
             EJanelaDeEdicao = true;
         }
 
@@ -62,28 +63,40 @@ namespace SysShop.Forms
             if (ValidarDados() == ValidacaoDeEntrada.DadosValidos)
             {
                 //Instancia o repositorio (que é o meio de acesso aos dados salvos no sistema)
-                var repositorio = new ProdutoBLL();
+                var produtoBLL = new ProdutoBLL();
 
-                //Verifica se a janela modal no momento está tendo a função de edição ou cadastro
-                if (!EJanelaDeEdicao)
+                try
                 {
-                    //Cria um novo produto de acordo com os campos do Dialog (Janela modal)
-                    GerarProduto();
-                    //Acrescenta o produto gerado ao sistema
-                    repositorio.AcrescentarProduto(produto);
-                    //Informa ao usuário do sucesso da gravação
-                    MessageBox.Show("Produto gravado com sucesso!", "Ação realizada com sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    //Retorne o resultado do Dialog como ok
-                    DialogResult = DialogResult.OK;
+                    //Verifica se a janela modal no momento está tendo a função de edição ou cadastro
+                    if (!EJanelaDeEdicao) //Caso não esteja em modo de edição (esteja em modo de cadastro)
+                    {
+                        //Cria um novo produto de acordo com os campos do Dialog (Janela modal)
+                        GerarProduto();
+                        //Acrescenta o produto gerado ao sistema
+                        produtoBLL.AcrescentarProduto(produto);
+                        //Informa ao usuário do sucesso da gravação
+                        MessageBox.Show("Produto gravado com sucesso!", "Ação realizada com sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        //Retorne o resultado do Dialog como ok
+                        DialogResult = DialogResult.OK;
+                    }
+                    else //if (EJanelaDeEdicao) - Caso esteja em modo de edição, não cadastro
+                    {
+                        //Atualiza o produto de acordo com os campos
+                        AtualizarProduto();
+
+                        //Chama o método EditarProduto da BLL para registrar a mudança no Banco de dados
+                        produtoBLL.EditarProduto(produto);
+
+                        //Informa ao usuário do sucesso da alteração
+                        MessageBox.Show("Produto alterado com sucesso!", "Ação realizada com sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        //Retorne o resultado do Dialog como ok
+                        DialogResult = DialogResult.OK;
+                    }
                 }
-                else
+                catch (InfoException ex)
                 {
-                    //Atualiza o produto de acordo com os campos
-                    AtualizarProduto();
-                    //Informa ao usuário do sucesso da alteração
-                    MessageBox.Show("Produto alterado com sucesso!", "Ação realizada com sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    //Retorne o resultado do Dialog como ok
-                    DialogResult = DialogResult.OK;
+                    new ErroDialog(ex.Titulo, ex.Message + "\nInformações técnicas:\n" + ex.InnerException.StackTrace).ShowDialog();
+                    DialogResult = DialogResult.Cancel;
                 }
             }
             //Caso não tenha se passado no teste de validação
@@ -181,22 +194,16 @@ namespace SysShop.Forms
         }
 
         /// <summary> Evento de clique para o botão "Cancelar" </summary>
-        private void btnCancelar_Click(object sender, EventArgs e)
+        private void btnLimpar_Click(object sender, EventArgs e)
         {
-            if (!EJanelaDeEdicao)
-            {
-                LimparCampos();
-            }
-            else
-            {
-                DialogResult = DialogResult.Cancel;
-            }
+            LimparCampos();
         }
 
         /// <summary> Evento de clique para o botão "Voltar". Basicamente retorna o valor de janela modal como DialogResult.Cancel e fecha a janela. </summary>
         private void btnVoltar_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
+            this.Close();
         }
     }
 }

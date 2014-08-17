@@ -57,6 +57,7 @@
             this.btnDetalhes.TabIndex = 3;
             this.btnDetalhes.Text = "Detalhes";
             this.btnDetalhes.UseVisualStyleBackColor = true;
+            this.btnDetalhes.Click += new System.EventHandler(this.btnDetalhes_Click);
             // 
             // ConsultaProdutosDialog
             // 
@@ -66,6 +67,7 @@
             this.Controls.Add(this.produtosGridView);
             this.Controls.Add(this.btnDetalhes);
             this.Name = "ConsultaProdutosDialog";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "ConsultaProdutosDialog";
             ((System.ComponentModel.ISupportInitialize)(this.produtosGridView)).EndInit();
             this.ResumeLayout(false);

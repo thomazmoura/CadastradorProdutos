@@ -1,5 +1,4 @@
-﻿using SysShop.Forms.UserControls;
-namespace SysShop.Forms
+﻿namespace SysShop.Forms
 {
     partial class CadastroProdutoDialog
     {
@@ -29,7 +28,7 @@ namespace SysShop.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnCancelar = new System.Windows.Forms.Button();
+            this.btnLimpar = new System.Windows.Forms.Button();
             this.btnOk = new System.Windows.Forms.Button();
             this.lblPreco = new System.Windows.Forms.Label();
             this.lblDescricao = new System.Windows.Forms.Label();
@@ -40,16 +39,16 @@ namespace SysShop.Forms
             this.btnVoltar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // btnCancelar
+            // btnLimpar
             // 
-            this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancelar.Location = new System.Drawing.Point(107, 135);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(81, 23);
-            this.btnCancelar.TabIndex = 12;
-            this.btnCancelar.Text = "Limpar";
-            this.btnCancelar.UseVisualStyleBackColor = true;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            this.btnLimpar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnLimpar.Location = new System.Drawing.Point(107, 135);
+            this.btnLimpar.Name = "btnLimpar";
+            this.btnLimpar.Size = new System.Drawing.Size(81, 23);
+            this.btnLimpar.TabIndex = 12;
+            this.btnLimpar.Text = "Limpar";
+            this.btnLimpar.UseVisualStyleBackColor = true;
+            this.btnLimpar.Click += new System.EventHandler(this.btnLimpar_Click);
             // 
             // btnOk
             // 
@@ -128,7 +127,7 @@ namespace SysShop.Forms
             this.CancelButton = this.btnVoltar;
             this.ClientSize = new System.Drawing.Size(281, 170);
             this.Controls.Add(this.btnVoltar);
-            this.Controls.Add(this.btnCancelar);
+            this.Controls.Add(this.btnLimpar);
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.lblPreco);
             this.Controls.Add(this.lblDescricao);
@@ -146,7 +145,7 @@ namespace SysShop.Forms
 
         #endregion
 
-        private System.Windows.Forms.Button btnCancelar;
+        private System.Windows.Forms.Button btnLimpar;
         public System.Windows.Forms.Button btnOk;
         private System.Windows.Forms.Label lblPreco;
         private System.Windows.Forms.Label lblDescricao;
