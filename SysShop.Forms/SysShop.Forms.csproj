@@ -67,11 +67,11 @@
     <Compile Include="ConsultaProdutosDialog.Designer.cs">
       <DependentUpon>ConsultaProdutosDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\ConsultaProdutos.cs">
-      <SubType>UserControl</SubType>
+    <Compile Include="ErroDialog.cs">
+      <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UserControls\ConsultaProdutos.Designer.cs">
-      <DependentUpon>ConsultaProdutos.cs</DependentUpon>
+    <Compile Include="ErroDialog.Designer.cs">
+      <DependentUpon>ErroDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="CadastroProdutoDialog.cs">
       <SubType>Form</SubType>
@@ -87,12 +87,11 @@
     <Compile Include="TelaPrincipal.Designer.cs">
       <DependentUpon>TelaPrincipal.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\IAcceptableControl.cs" />
     <EmbeddedResource Include="ConsultaProdutosDialog.resx">
       <DependentUpon>ConsultaProdutosDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\ConsultaProdutos.resx">
-      <DependentUpon>ConsultaProdutos.cs</DependentUpon>
+    <EmbeddedResource Include="ErroDialog.resx">
+      <DependentUpon>ErroDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CadastroProdutoDialog.resx">
       <DependentUpon>CadastroProdutoDialog.cs</DependentUpon>
@@ -162,6 +161,9 @@
       <ProductName>Windows Installer 4.5</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Imagens\warning-145066_640.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

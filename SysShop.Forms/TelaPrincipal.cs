@@ -30,7 +30,7 @@ namespace SysShop.Forms
             //Cria a janela modal de cadastro de produtos
             var cadastroProduto = new CadastroProdutoDialog();
             //Exibe a janela modal de cadastro de produtos
-            cadastroProduto.Show();
+            cadastroProduto.ShowDialog();
         }
 
         /// <summary> Evento para a ação de se clicar no toolstripmenuitem Arquivo>>Consulta </summary>
@@ -38,7 +38,7 @@ namespace SysShop.Forms
         {
             //Cria o UserControl de consulta de produtos
             var consultaProdutos = new ConsultaProdutosDialog();
-            consultaProdutos.Show();
+            consultaProdutos.ShowDialog();
         }
 
         /// <summary> Evento para a ação de se clicar no toolstripmenuitem Arquivo>>Sair </summary>

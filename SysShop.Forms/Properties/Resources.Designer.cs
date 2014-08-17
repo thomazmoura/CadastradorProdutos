@@ -59,5 +59,15 @@ namespace SysShop.Forms.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap warning_145066_640 {
+            get {
+                object obj = ResourceManager.GetObject("warning-145066_640", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }
