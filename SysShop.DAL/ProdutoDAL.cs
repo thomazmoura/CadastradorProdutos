@@ -20,7 +20,7 @@ namespace SysShop.DAL
         public IEnumerable<ProdutoDTO> GetProdutos()
         {
             //Definimos a query que iremos executar
-            string sqlString = "SELECT * FROM PRODUTO";
+            string sqlString = "SELECT * FROM Produto";
 
             //Cria-se uma instância da classe de conexão
             var conector = new ConectorDAL();
@@ -96,6 +96,8 @@ namespace SysShop.DAL
             }
         }
 
+        /// <summary> Atualiza os dados do banco de dados de um produto com base na versão atualizada desse mesmo produto. </summary>
+        /// <param name="produto"></param>
         public void EditarProduto(ProdutoDTO produto)
         {
             //Criamos um StringBuilder para construir nossa query (consulta SQL)
@@ -122,6 +124,35 @@ namespace SysShop.DAL
             sqlParametros.Add(conector.CriarParametro("@Descricao", produto.Descricao));
             sqlParametros.Add(conector.CriarParametro("@Preco", produto.Preco));
             sqlParametros.Add(conector.CriarParametro("@TipoProdutoId", produto.TipoProdutoId));
+            sqlParametros.Add(conector.CriarParametro("@ProdutoId", produto.ProdutoId));
+
+            //Abrimos uma nova conexão com o banco de dados utilizando o conector
+            using (var conexao = conector.GetConexaoAberta())
+            {
+                //Executamos a transacao propriamente dita no banco de dados
+                conector.ExecutarTransacao(conexao, sqlStringBuilder.ToString(), CommandType.Text, sqlParametros);
+            }
+        }
+
+        /// <summary> Deleta um produto do banco de dados. </summary>
+        /// <param name="produto"> O produto a ser excluído do banco de dados. </param>
+        public void DeletarProduto(ProdutoDTO produto)
+        {
+            //Criamos um StringBuilder para construir nossa query (consulta SQL)
+            StringBuilder sqlStringBuilder = new StringBuilder();
+
+            //Criamos a transacao propriamente dita
+            sqlStringBuilder.AppendLine("DELETE Produto");
+            sqlStringBuilder.AppendLine("WHERE");
+            sqlStringBuilder.AppendLine("  ProdutoId = @ProdutoId");
+
+            //Cria-se uma instância da classe de conexão para poder executar a transacao
+            var conector = new ConectorDAL();
+
+            //Criamos uma lista de parâmetros SQL para serem enviados junto com a transação - por razões de segurança é nesses parâmetros que inseriremos os valores
+            List<DbParameter> sqlParametros = new List<DbParameter>();
+
+            //Acrescentamos cada um dos parâmetros listados na consulta à lista
             sqlParametros.Add(conector.CriarParametro("@ProdutoId", produto.ProdutoId));
 
             //Abrimos uma nova conexão com o banco de dados utilizando o conector

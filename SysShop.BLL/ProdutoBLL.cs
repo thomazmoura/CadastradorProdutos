@@ -28,7 +28,7 @@ namespace SysShop.BLL
             }
             catch (Exception ex)
             {
-                //Lança uma exceção personalida
+                //Lança uma exceção personalizada
                 throw new InfoException("Erro de acesso aos dados","Houve algum erro no acesso ao banco de dados ao ler os produtos registrados.\nNão foi possível se obter os dados.\nPor gentileza, contate a área de desenvolvimento da empresa.", ex);
             }
         }
@@ -43,11 +43,13 @@ namespace SysShop.BLL
             }
             catch (Exception ex)
             {
-                //Lança uma exceção personalida
+                //Lança uma exceção personalizada
                 throw new InfoException("Erro de acesso aos dados", "Houve algum erro no acesso ao banco de dados durante a gravação do produto.\nO registro do produto não foi efetuado.\nPor gentileza, contate a área de desenvolvimento da empresa.", ex);
             }
         }
 
+        /// <summary> Atualiza um produto salvo com os novos valores passados. </summary>
+        /// <param name="produto"> O produto a ser atualizado. </param>
         public void EditarProduto(ProdutoDTO produto)
         {
             try
@@ -56,9 +58,25 @@ namespace SysShop.BLL
             }
             catch (Exception ex)
             {
-                //Lança uma exceção personalida
-                throw new InfoException("Erro de acesso aos dados", "Houve algum erro no acesso ao banco de dados durante a atualização do produto.\nA atualizaão não foi realizada.\nPor gentileza, contate a área de desenvolvimento da empresa.", ex);
+                //Lança uma exceção personalizada
+                throw new InfoException("Erro de acesso aos dados", "Houve algum erro no acesso ao banco de dados durante a atualização do produto.\nA atualização não foi realizada.\nPor gentileza, contate a área de desenvolvimento da empresa.", ex);
             }
         }
+
+        /// <summary> Exclui um produto salvo do banco de dados. </summary>
+        /// <param name="produto"> O produto a ser excluído. </param>
+        public void DeletarProduto(ProdutoDTO produto)
+        {
+            try
+            {
+                produtoDAL.DeletarProduto(produto);
+            }
+            catch (Exception ex)
+            {
+                //Lança uma exceção personalizada
+                throw new InfoException("Erro de acesso aos dados", "Houve algum erro no acesso ao banco de dados durante a exclusão do produto.\nO produto não pôde ser excluído.\nPor gentileza, contate a área de desenvolvimento da empresa.", ex);
+            }
+        }
+
     }
 }

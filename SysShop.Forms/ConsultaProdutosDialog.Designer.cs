@@ -30,6 +30,7 @@
         {
             this.produtosGridView = new System.Windows.Forms.DataGridView();
             this.btnDetalhes = new System.Windows.Forms.Button();
+            this.btnDeletar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.produtosGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -51,7 +52,7 @@
             // 
             // btnDetalhes
             // 
-            this.btnDetalhes.Location = new System.Drawing.Point(441, 12);
+            this.btnDetalhes.Location = new System.Drawing.Point(360, 12);
             this.btnDetalhes.Name = "btnDetalhes";
             this.btnDetalhes.Size = new System.Drawing.Size(75, 23);
             this.btnDetalhes.TabIndex = 3;
@@ -59,11 +60,22 @@
             this.btnDetalhes.UseVisualStyleBackColor = true;
             this.btnDetalhes.Click += new System.EventHandler(this.btnDetalhes_Click);
             // 
+            // btnDeletar
+            // 
+            this.btnDeletar.Location = new System.Drawing.Point(441, 12);
+            this.btnDeletar.Name = "btnDeletar";
+            this.btnDeletar.Size = new System.Drawing.Size(75, 23);
+            this.btnDeletar.TabIndex = 4;
+            this.btnDeletar.Text = "Deletar";
+            this.btnDeletar.UseVisualStyleBackColor = true;
+            this.btnDeletar.Click += new System.EventHandler(this.btnDeletar_Click);
+            // 
             // ConsultaProdutosDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(528, 369);
+            this.Controls.Add(this.btnDeletar);
             this.Controls.Add(this.produtosGridView);
             this.Controls.Add(this.btnDetalhes);
             this.Name = "ConsultaProdutosDialog";
@@ -78,5 +90,6 @@
 
         private System.Windows.Forms.DataGridView produtosGridView;
         private System.Windows.Forms.Button btnDetalhes;
+        private System.Windows.Forms.Button btnDeletar;
     }
 }
