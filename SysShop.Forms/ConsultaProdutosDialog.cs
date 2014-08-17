@@ -1,31 +1,21 @@
-﻿#region Importações do sistema
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-#endregion
-#region Importações da solução
-using SysShop.Modelo;
-using SysShop.Repositorio;
-#endregion
+using SysShop.BLL;
+using SysShop.DTO;
 
-namespace SysShop.Forms.UserControls
+namespace SysShop.Forms
 {
-    /// <summary> UserControl para consulta de produtos </summary>
-    public partial class ConsultaProdutos : UserControl, IAcceptableControl
+    public partial class ConsultaProdutosDialog : Form
     {
-        /// <summary> Retorna o botão de confirmação </summary>
-        public Button AcceptButton
-        {
-            get { return btnDetalhes; }
-        }
 
         /// <summary> Construtor do UserControl para consulta de produtos registrados no sistema </summary>
-        public ConsultaProdutos()
+        public ConsultaProdutosDialog()
         {
             InitializeComponent();
             PopularProdutos();
@@ -33,19 +23,19 @@ namespace SysShop.Forms.UserControls
 
         /// <summary> Método para popular o produtosGridView com os produtos salvos na fonte de dados. </summary>
         public void PopularProdutos(){
-            var repositorio = new ProdutoRepositorio();
+            var repositorio = new ProdutoBLL();
             produtosGridView.DataSource = repositorio.GetProdutos();
         }
 
         /// <summary> Evento de clique para o botão "Detalhes" </summary>
         private void btnDetalhes_Click(object sender, EventArgs e)
         {
-            Produto produto;
+            ProdutoDTO produto;
             if (produtosGridView.SelectedCells.Count > 0)
-                produto = produtosGridView.SelectedCells[0].OwningRow.DataBoundItem as Produto;
+                produto = produtosGridView.SelectedCells[0].OwningRow.DataBoundItem as ProdutoDTO;
             else
                 return;
-            var janelaEdicao = new EdicaoProdutoJanela(produto);
+            var janelaEdicao = new CadastroProdutoDialog(produto);
             if (janelaEdicao.ShowDialog() == DialogResult.OK)
                 produtosGridView.Refresh();
         }

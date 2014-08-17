@@ -13,6 +13,21 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -46,11 +61,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UserControls\CadastroProduto.cs">
-      <SubType>UserControl</SubType>
+    <Compile Include="ConsultaProdutosDialog.cs">
+      <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UserControls\CadastroProduto.Designer.cs">
-      <DependentUpon>CadastroProduto.cs</DependentUpon>
+    <Compile Include="ConsultaProdutosDialog.Designer.cs">
+      <DependentUpon>ConsultaProdutosDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\ConsultaProdutos.cs">
       <SubType>UserControl</SubType>
@@ -58,11 +73,11 @@
     <Compile Include="UserControls\ConsultaProdutos.Designer.cs">
       <DependentUpon>ConsultaProdutos.cs</DependentUpon>
     </Compile>
-    <Compile Include="EdicaoProdutoJanela.cs">
+    <Compile Include="CadastroProdutoDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EdicaoProdutoJanela.Designer.cs">
-      <DependentUpon>EdicaoProdutoJanela.cs</DependentUpon>
+    <Compile Include="CadastroProdutoDialog.Designer.cs">
+      <DependentUpon>CadastroProdutoDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -73,14 +88,14 @@
       <DependentUpon>TelaPrincipal.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\IAcceptableControl.cs" />
-    <EmbeddedResource Include="UserControls\CadastroProduto.resx">
-      <DependentUpon>CadastroProduto.cs</DependentUpon>
+    <EmbeddedResource Include="ConsultaProdutosDialog.resx">
+      <DependentUpon>ConsultaProdutosDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\ConsultaProdutos.resx">
       <DependentUpon>ConsultaProdutos.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EdicaoProdutoJanela.resx">
-      <DependentUpon>EdicaoProdutoJanela.cs</DependentUpon>
+    <EmbeddedResource Include="CadastroProdutoDialog.resx">
+      <DependentUpon>CadastroProdutoDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -95,6 +110,7 @@
     <EmbeddedResource Include="TelaPrincipal.resx">
       <DependentUpon>TelaPrincipal.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -106,16 +122,47 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SysShop.Modelo\SysShop.Modelo.csproj">
-      <Project>{8BEA689E-BF22-4971-8394-E4D25136B797}</Project>
-      <Name>SysShop.Modelo</Name>
+    <ProjectReference Include="..\SysShop.BLL\SysShop.BLL.csproj">
+      <Project>{2535378B-892A-4AB7-9BC5-0CA80B9D18C6}</Project>
+      <Name>SysShop.BLL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SysShop.Repositorio\SysShop.Repositorio.csproj">
-      <Project>{3D0EA4A9-5FB0-4BAE-95FB-24DE4674E0F6}</Project>
-      <Name>SysShop.Repositorio</Name>
+    <ProjectReference Include="..\SysShop.DTO\SysShop.DTO.csproj">
+      <Project>{8BEA689E-BF22-4971-8394-E4D25136B797}</Project>
+      <Name>SysShop.DTO</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 Client Profile %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Sql.Server.Express.10.0">
+      <Visible>False</Visible>
+      <ProductName>SQL Server 2008 Express</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.4.5">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 4.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

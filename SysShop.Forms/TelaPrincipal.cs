@@ -9,7 +9,7 @@ using System.Text;
 using System.Windows.Forms;
 #endregion
 #region Importações da solução
-using SysShop.Forms.UserControls;
+using SysShop.BLL;
 #endregion
 
 namespace SysShop.Forms
@@ -27,29 +27,18 @@ namespace SysShop.Forms
         /// <summary> Evento para a ação de se clicar no toolstripmenuitem Arquivo>>Cadastro </summary>
         private void cadastroToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //Cria o UserControl de cadastro de produtos
-            var cadastroProduto = new CadastroProduto();
-            //Limpa qualquer controle que esteja ativo
-            if(pnlPrincipal.Controls.Count > 0)
-                pnlPrincipal.Controls.Clear();
-            //Ativa o controle de Cadastro de Produto
-            pnlPrincipal.Controls.Add(cadastroProduto);
-            //Define o botão de confirmação do cadastroProduto como sendo o botão de confirmação para a TelaPrincipal
-            AcceptButton = cadastroProduto.AcceptButton;
+            //Cria a janela modal de cadastro de produtos
+            var cadastroProduto = new CadastroProdutoDialog();
+            //Exibe a janela modal de cadastro de produtos
+            cadastroProduto.Show();
         }
 
         /// <summary> Evento para a ação de se clicar no toolstripmenuitem Arquivo>>Consulta </summary>
         private void consultaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //Cria o UserControl de consulta de produtos
-            var consultaProdutos = new ConsultaProdutos();
-            //Limpa qualquer controle que esteja ativo
-            if (pnlPrincipal.Controls.Count > 0)
-                pnlPrincipal.Controls.Clear();
-            //Ativa o controle de Consulta de Produtos
-            pnlPrincipal.Controls.Add(consultaProdutos);
-            //Define o botão de confirmação do consultaProdutos como sendo o botão de confirmação para a TelaPrincipal
-            AcceptButton = consultaProdutos.AcceptButton;
+            var consultaProdutos = new ConsultaProdutosDialog();
+            consultaProdutos.Show();
         }
 
         /// <summary> Evento para a ação de se clicar no toolstripmenuitem Arquivo>>Sair </summary>
