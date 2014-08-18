@@ -43,6 +43,7 @@
     <Compile Include="InfoException.cs" />
     <Compile Include="ProdutoBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TipoProdutoBLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SysShop.DAL\SysShop.DAL.csproj">
