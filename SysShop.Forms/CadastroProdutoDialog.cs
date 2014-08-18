@@ -22,21 +22,24 @@ namespace SysShop.Forms
         /// <summary> Armazena o produto gerado por esse Dialog (Janela modal). </summary>
         protected ProdutoDTO produto = null;
 
-        /// <summary> Construtor básico do CadastroProdutoDialog - Para criação de novos produtos em uma TelaPrincipal. </summary>
-        public CadastroProdutoDialog()
-        {
-            InitializeComponent();
-            EJanelaDeEdicao = false;
-        }
-
         /// <summary> Lista de resultados possíveis para o teste de validação de entrada para essa tela. </summary>
-        protected enum ValidacaoDeEntrada {
+        protected enum ValidacaoDeEntrada
+        {
             DadosValidos,
             NomeVazio,
             DescricaoVazia,
             PrecoVazio,
             PrecoInvalido,
             PrecoNegativo
+        }
+
+        /// <summary> Construtor básico do CadastroProdutoDialog - Para criação de novos produtos em uma TelaPrincipal. </summary>
+        public CadastroProdutoDialog()
+        {
+            InitializeComponent();
+            EJanelaDeEdicao = false;
+            produto = new ProdutoDTO();
+            PopularTiposProduto();
         }
 
         /// <summary> Construtor para edição de produtos - Para uso em edição de produtos em uma TelaPrincipal </summary>
@@ -51,6 +54,7 @@ namespace SysShop.Forms
             btnOk.Text = "Salvar";
             btnLimpar.Text = "Cancelar";
             EJanelaDeEdicao = true;
+            PopularTiposProduto();
         }
 
         /// <summary> Define se esse controle é um controle de edição de um produto existente ou gravação de um produto novo </summary>
@@ -156,6 +160,7 @@ namespace SysShop.Forms
                 tbxNome.Text = produto.Nome;
                 tbxDescricao.Text = produto.Descricao;
                 tbxPreco.Text = produto.Preco.ToString();
+                cbxTipoProduto.SelectedValue = produto.TipoProdutoId;
             }
         }
 
@@ -167,6 +172,7 @@ namespace SysShop.Forms
             tbxNome.Clear();
             tbxDescricao.Clear();
             tbxPreco.Clear();
+            cbxTipoProduto.SelectedIndex = 0;
         }
 
         /// <summary> Instancia um Produto de acordo com os valores informados dos campos do Dialog (Janela modal) </summary>
@@ -176,7 +182,8 @@ namespace SysShop.Forms
             {
                 Nome = tbxNome.Text,
                 Descricao = tbxDescricao.Text,
-                Preco = decimal.Parse(tbxPreco.Text)
+                Preco = decimal.Parse(tbxPreco.Text),
+                TipoProdutoId = Convert.ToInt32(cbxTipoProduto.SelectedValue)
             };
         }
 
@@ -188,6 +195,7 @@ namespace SysShop.Forms
                 produto.Nome = tbxNome.Text;
                 produto.Descricao = tbxDescricao.Text;
                 produto.Preco = decimal.Parse(tbxPreco.Text);
+                produto.TipoProdutoId = Convert.ToInt32(cbxTipoProduto.SelectedValue);
             }
             else
                 GerarProduto();
@@ -204,6 +212,20 @@ namespace SysShop.Forms
         {
             DialogResult = DialogResult.Cancel;
             this.Close();
+        }
+
+        /// <summary> Alimenta o combobox de TiposProduto. </summary>
+        protected void PopularTiposProduto()
+        {
+            //Alimenta o combobox com os TiposProduto salvos no sistema
+            cbxTipoProduto.DataSource = new TipoProdutoBLL().GetTiposProduto();
+
+            //Define o TipoProdutoId como sendo o elemento enviado como dado selecionado do combobox
+            cbxTipoProduto.ValueMember = "TipoProdutoId";
+            //Define a Descricao como sendo o elemento visível do combobox
+            cbxTipoProduto.DisplayMember = "Descricao";
+            //Define o item selecionado do combobox como sendo o TipoProduto do Produto sendo cadastrado/editado
+            cbxTipoProduto.SelectedValue = produto.TipoProdutoId;
         }
     }
 }

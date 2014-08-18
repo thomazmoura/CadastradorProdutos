@@ -64,10 +64,12 @@ namespace SysShop.Forms
             else
                 return;
 
+            string pergunta = string.Format("Deseja mesmo excluir o produto {0}?", produto.Nome);
+
             //Variável que armazenará o resultado da confirmação
             DialogResult resposta;
             //Faz a pergunta (através de um MessageBox) e atribui o resultado à variável resposta
-            resposta = MessageBox.Show("Deseja mesmo excluir esse produto?", "Confirmação de exclusão", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            resposta = MessageBox.Show(pergunta, "Confirmação de exclusão", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             //Se a resposta for posistiva
             if (resposta == DialogResult.Yes)
             {
@@ -95,6 +97,12 @@ namespace SysShop.Forms
             produtosGridView.Columns["Descricao"].HeaderText = "Descrição";
             produtosGridView.Columns["Preco"].HeaderText = "Preço";
             produtosGridView.Columns["Preco"].DefaultCellStyle.Format = "c"; //Define o formato padrão como currency (moeda) para a coluna Preco
+            produtosGridView.Columns["TipoProdutoId"].Visible = false;
+        }
+
+        private void tbxVoltar_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
