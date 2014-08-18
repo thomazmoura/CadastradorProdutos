@@ -23,8 +23,15 @@ namespace SysShop.BLL
         {
             try
             {
+                var listaProdutos = produtoDAL.GetProdutos();
+
+                foreach(var produto in listaProdutos)
+                {
+                    produto.TipoProduto = new TipoProdutoBLL().GetTipoProduto(produto.TipoProdutoId);
+                }
+
                 //Retorna a lista de produtos salvos como uma interface iterável
-                return produtoDAL.GetProdutos();
+                return listaProdutos;
             }
             catch (Exception ex)
             {
