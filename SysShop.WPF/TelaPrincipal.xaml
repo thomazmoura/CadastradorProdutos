@@ -1,0 +1,24 @@
+﻿<Window x:Class="SysShop.WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <Menu Height="23" Name="menu1" VerticalAlignment="Top" >
+            <MenuItem Header="Arquivo" Name="mItmArquivo">
+                <MenuItem Header="Produtos" Name="mItmArquivoProdutos">
+                    <MenuItem Header="Cadastro" Name="mItmArquivoProdutosCadastro" Click="mItmArquivoProdutosCadastro_Click"/>
+                    <MenuItem Header="Consulta" Name="mItmArquivoProdutosConsulta"/>
+                </MenuItem>
+                <Separator/>
+                <MenuItem Header="Sair" Name="mItmSair" Click="mItmSair_Click"/>
+            </MenuItem>
+            
+            <MenuItem Header="Ajuda" Name="mItmAjuda">
+                <MenuItem Header="Sobre" Name="mItmSobre" Click="mItmSobre_Click"/>
+            </MenuItem>
+        </Menu>
+        <Grid Margin="0,21,0,0" Name="mainGrid">
+            <TabControl Margin="0,0,0,0" Name="tbctrlPrincipal"></TabControl>
+        </Grid>
+    </Grid>
+</Window>
